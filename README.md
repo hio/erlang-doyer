@@ -14,7 +14,7 @@ under construction.
 some features are already available.
 but not all of erlang syntax is traversed yet.
 if inside some syntaxes, e.g. if syntax, these features do not
-work and it appears as just an erlang code.
+work and your codes are appeared as just an erlang code.
 
 
 BUILD AND INSTALL
