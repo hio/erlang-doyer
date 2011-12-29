@@ -17,9 +17,9 @@ BUILD AND INSTALL
 
 small Makefile is contained, just type make.
 
- $ make
- $ make check
- $ make install
+    $ make
+    $ make check
+    $ make install
 
 DESTDIR also works.
 
@@ -29,61 +29,61 @@ SYNTAX
 
 1. 
 
-  ?do([
-    _X = {value, 10}, % ?return(10).
-    _Y = {value, 20},
-    %?return(_X+_Y),
-    {value, 100},
-    {value, {_X,_Y}}
-  ]).
-  
-  ?do(monadmod, [
-    ..
-  ]).
-
-  ?do([m1, m2, ...], [
-    ..
-  ]).
+    ?do([
+      _X = {value, 10}, % ?return(10).
+      _Y = {value, 20},
+      %?return(_X+_Y),
+      {value, 100},
+      {value, {_X,_Y}}
+    ]).
+    
+    ?do(monadmod, [
+      ..
+    ]).
+    
+    ?do([m1, m2, ...], [
+      ..
+    ]).
 
 putting '_' for monadmod gets same behavior as ?do([..]).
 
-  % same as ?do([..]).
-  ?do('_', [
-    ..
-  ]).
+    % same as ?do([..]).
+    ?do('_', [
+      ..
+    ]).
 
 2. begin .. end block version of (1).
 
-  ?do(begin
-    ..
-  end).
-
-  ?do(MonadMod, begin
-    ..
-  end).
+    ?do(begin
+      ..
+    end).
+    
+    ?do(MonadMod, begin
+      ..
+    end).
 
 3. tuple representation version of (1).
 
-  ?do({
-    ..
-  }).
-
-  ?do(MonadMod, {
-    ..
-  }).
+    ?do({
+      ..
+    }).
+    
+    ?do(MonadMod, {
+      ..
+    }).
 
 4.
 
-  ?do([
-    MonadMod
-  ||
-    X <- doyer_state:return(1),
-    Y <- doyer_state:state(fun(_Seed) ->
-      io:format(".. seed=~p~n",[_Seed]),
-      {2,xx}
-    end),
-    doyer_state:return({X,Y})
-  ]).
+    ?do([
+      MonadMod
+    ||
+      X <- doyer_state:return(1),
+      Y <- doyer_state:state(fun(_Seed) ->
+        io:format(".. seed=~p~n",[_Seed]),
+        {2,xx}
+      end),
+      doyer_state:return({X,Y})
+    ]).
 
 
 criteria of selection monadmod
