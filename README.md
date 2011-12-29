@@ -11,6 +11,11 @@ DESCRIPTION
 
 under construction.
 
+some features are already available.
+but not all of erlang syntax is traversed yet.
+if inside some syntaxes, e.g. if syntax, these features do not
+work and it appears as just an erlang code.
+
 
 BUILD AND INSTALL
 -----------------
@@ -27,64 +32,87 @@ DESTDIR also works.
 SYNTAX
 ------
 
-1. 
+wrap do-notation with ?do/1.
+but there is erlang restriction, `Exprs' of ?do(Exprs) must be
+valid single erlang expression.
 
-    ?do([
-      _X = {value, 10}, % ?return(10).
-      _Y = {value, 20},
-      %?return(_X+_Y),
-      {value, 100},
-      {value, {_X,_Y}}
-    ]).
-    
-    ?do(monadmod, [
-      ..
-    ]).
-    
-    ?do([m1, m2, ...], [
-      ..
-    ]).
+then, use with collection syntax.
+there is following collection syntaxes.
 
-putting '_' for monadmod gets same behavior as ?do([..]).
+1.  use list syntax.
 
-    % same as ?do([..]).
-    ?do('_', [
-      ..
-    ]).
+        ?do([
+          X = {value, 10}, % ?return(10).
+          Y = {value, 20},
+          %?return(X + Y),
+          {value, 100},
+          {value, {X, Y}}
+        ]).
+        
+        ?do(monadmod, [
+          ..
+        ]).
+        
+        ?do([m1, m2, ...], [
+          ..
+        ]).
 
-2. begin .. end block version of (1).
+    putting '_' for monadmod gets same behavior as ?do([..]).
 
-    ?do(begin
-      ..
-    end).
-    
-    ?do(MonadMod, begin
-      ..
-    end).
+        % same as ?do([..]).
+        ?do('_', [
+          ..
+        ]).
 
-3. tuple representation version of (1).
+2.  begin .. end block version of (1).
 
-    ?do({
-      ..
-    }).
-    
-    ?do(MonadMod, {
-      ..
-    }).
+        ?do(begin
+          ..
+        end).
+        
+        ?do(MonadMod, begin
+          ..
+        end).
 
-4.
+3.  tuple.
 
-    ?do([
-      MonadMod
-    ||
-      X <- doyer_state:return(1),
-      Y <- doyer_state:state(fun(_Seed) ->
-        io:format(".. seed=~p~n",[_Seed]),
-        {2,xx}
-      end),
-      doyer_state:return({X,Y})
-    ]).
+        ?do({
+          ..
+        }).
+        
+        ?do(MonadMod, {
+          ..
+        }).
 
+4.  list comprehension.
+
+        ?do([
+          MonadMod
+        ||
+          X <- doyer_state:return(1),
+          Y <- doyer_state:state(fun(_Seed) ->
+            io:format(".. seed=~p~n",[_Seed]),
+            {2,xx}
+          end),
+          doyer_state:return({X,Y})
+        ]).
+
+
+5.  record (not implemeted)
+
+        ?do(#do{
+          'X' = {value, 10}, % ?return(10).
+          _ = ?return(20),
+          _ = {value, X}
+        }).
+
+6.  anonymous function (not implemeted)
+
+        ?do(fun() ->
+          X = {value, 10}, % ?return(10).
+          ?return(20),
+          {value, X}
+        end).
 
 criteria of selection monadmod
 ------------------------------
@@ -110,6 +138,6 @@ monadmod からインスタンス構造を示すようにして,
 実行するまで動くかはわからないけどそこはやっぱりhaskellじゃないし..?
 １つに確定することができればreturnを使うことは可能に.
 
-% ----------------------------------------------------------------------------
-% End of File.
-% ----------------------------------------------------------------------------
+<!-- ===================================================================== -->
+<!-- End of File.                                                          -->
+<!-- ===================================================================== -->
