@@ -4,7 +4,7 @@ erlang-doyer
 
 Do-notation in Erlang.
 
-see exapmles/exapmlesest.erl as a sample code.
+see examples/example.erl as a sample code.
 
 DESCRIPTION
 -----------
