@@ -1,0 +1,9 @@
+syntax: glob
+
+_build
+log.txt
+
+*.swp
+erl_crash.dump
+*.beam
+

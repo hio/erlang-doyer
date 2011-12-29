@@ -1,0 +1,16 @@
+{
+  [
+    'doyer.erl',
+    'doyer_either.erl',
+    'doyer_execute.erl',
+    'doyer_maybe.erl',
+    'doyer_ok_error.erl',
+    'doyer_state.erl',
+    'doyer_transform.erl'
+  ],
+  [
+    verbose,
+    warn_missing_spec,
+    {outdir, "../_build/doyer-0.01/ebin"}
+  ]
+}.

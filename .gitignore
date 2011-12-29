@@ -1,0 +1,9 @@
+
+_build
+log.txt
+
+*.swp
+erl_crash.dump
+*.beam
+
+MEMO.txt
