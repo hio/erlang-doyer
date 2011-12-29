@@ -33,11 +33,11 @@ SYNTAX
 ------
 
 wrap do-notation with ?do/1.
-but there is erlang restriction, `Exprs' of ?do(Exprs) must be
+but there is erlang restriction, `Exprs` of `?do(Exprs)` must be
 valid single erlang expression.
 
-then, use with collection syntax.
-there is following collection syntaxes.
+then, introduce collection syntax.
+there is following syntax candidates.
 
 1.  use list syntax.
 
@@ -48,29 +48,10 @@ there is following collection syntaxes.
           {value, 100},
           {value, {X, Y}}
         ]).
-        
-        ?do(monadmod, [
-          ..
-        ]).
-        
-        ?do([m1, m2, ...], [
-          ..
-        ]).
-
-    putting '_' for monadmod gets same behavior as ?do([..]).
-
-        % same as ?do([..]).
-        ?do('_', [
-          ..
-        ]).
 
 2.  begin .. end block version of (1).
 
         ?do(begin
-          ..
-        end).
-        
-        ?do(MonadMod, begin
           ..
         end).
 
@@ -80,14 +61,10 @@ there is following collection syntaxes.
           ..
         }).
         
-        ?do(MonadMod, {
-          ..
-        }).
-
 4.  list comprehension.
 
         ?do([
-          MonadMod
+          _
         ||
           X <- doyer_state:return(1),
           Y <- doyer_state:state(fun(_Seed) ->
@@ -114,13 +91,15 @@ there is following collection syntaxes.
           {value, X}
         end).
 
-criteria of selection monadmod
-------------------------------
+criteria of selecting monad module
+----------------------------------
 
-currently, monadmod is selected by left hand value of bind.
+currently, monad is selected by left hand value of bind.
 and it is occured at each invocation of bind.
 but these are not well as monadic behavior.
+this will be changed.
 
+you can specify monad module as `?do(mod, [..])`.
 
 (ja) 現在のmonad選択基準::
 
